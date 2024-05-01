@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    *{
+      box-sizing: border-box;
+    }
+    html,body{
+      width: 100%;
+      height: 100%;
+    }
+    body{
+      font-family: Helvetica, sans-serif, Times, serif;
+      background-color: black;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+    main{
+      width: 260px;
+
+    }
+    .CSS-Calculation-Result{
+      text-align: right;
+      font-size: 2.5rem;
+      color: white;
+      font-family: Helvetica, sans-serif;
+      overflow-x:scroll;
+      scrollbar-width:none;
+      scroll-behavior: smooth;
+      scrollbar-color: black;
+    }
+    button{
+      height: 3.5rem;
+      width: 3.5rem;
+      font-size: 1.75rem;
+      border-radius: 50rem;
+      border: none;
+      background-color: hsl(0, 0%, 20%);
+      color: white;
+      margin-left: .35rem;
+      cursor: pointer;
+      transition: all 300ms ease-in-out;
+    }
+    button:active{
+      background-color: hsl(0, 0%, 50%);
+    }
+    .calculations-Sign{
+      background-color: hsl(36, 100%, 52%);
+      font-size: 2rem;
+    }  
+    .calculations-Sign:active{
+      background-color: hsl(36, 100%, 72%);
+    }
+    .AC-Color{
+      background-color: hsl(0, 0%, 65%);
+      color: black;
+    } 
+    .AC-Color:active{
+      backdrop-filter:hsl(0, 0%, 85%) ;
+    }
+    .calculate-style-0{
+      width: 7.55rem;
+      text-align: left;
+      padding-left: 1.25rem;
+      font-size: 1.75rem;
+    }
+    .plms{
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <p class="JS-Calculation-Element CSS-Calculation-Result">
+    0
+  </p>
+  <p>
+    <button onclick="clearIsEqualTo('', 'Cleared.')" class="AC-Color">
+      AC
+     </button>
+     <button onclick="plusToMinus();" class="AC-Color plms">
+      <sup>+</sup>/-
+     </button>
+     <button onclick="percentFunction();" class="AC-Color">
+      &percnt;
+     </button>
+     <button onclick="updateCalculator(' / ')" class="calculations-Sign Divide-Sign-Calculator">
+      &div;
+    </button>
+    
+     <p>
+      <button onclick="updateCalculator(7)">
+        7
+      </button>
+      <button onclick="updateCalculator(8)">
+        8
+      </button>
+      <button onclick="updateCalculator(9)">
+        9
+      </button>
+      <button onclick="updateCalculator('  * ')"class="calculations-Sign">
+        &times;
+      </button>
+     </p>
+     <p>
+      <button onclick="updateCalculator(4)">
+        4
+      </button>
+      <button onclick="updateCalculator(5)">
+        5
+      </button>
+      <button onclick="updateCalculator(6)">
+        6
+      </button>
+      <button onclick="updateCalculator(' - ')" class="calculations-Sign">
+        -
+      </button>
+     </p>
+  <button onclick="updateCalculator(1)">
+    1
+  </button>
+  <button onclick="updateCalculator(2)">
+    2
+  </button>
+  <button onclick="updateCalculator(3)">
+    3
+  </button>
+  <button onclick="updateCalculator(' + ') "class="calculations-Sign">
+    +
+  </button>
+  </p>
+ 
+ <p>
+  <button onclick="updateCalculator(0)" class="calculate-style-0">
+    0
+  </button>
+  <button onclick="updateCalculator('.')">
+    .
+  </button>
+  <button onclick="
+  localStorage.setItem('Result', JSON.stringify((eval(calculation)))); document.querySelector('.JS-Calculation-Element').innerHTML = (JSON.parse(localStorage.getItem('Result')));
+"  class="calculations-Sign">
+    =
+  </button>
+
+ </p>
+</main>
+  <script>
+    let calculation = '';
+    let turned = '';
+    function plusToMinus(){
+      if (0 < calculation ){
+      calculation = -calculation;
+      console.log(calculation);
+        document.querySelector('.JS-Calculation-Element').innerHTML = calculation;
+      }
+     else {
+        calculation = eval(calculation);
+        calculation = Math.abs(calculation);
+        turned = calculation;
+        document.querySelector('.JS-Calculation-Element').innerHTML = turned;
+     }
+    }
+    function updateCalculator(number) {
+      calculation += number; 
+      document.querySelector('.JS-Calculation-Element').innerHTML = calculation;
+    }
+    function percentFunction(){
+      calculation /= 100;
+      document.querySelector('.JS-Calculation-Element').innerHTML = calculation;
+    }
+    function clearIsEqualTo(sum, Result){
+      calculation = localStorage.removeItem('Result');
+      calculation = '';
+      document.querySelector('.JS-Calculation-Element').innerHTML = Result;
+    }
+    document.querySelector('.JS-Calculation-Element').innerHTML = JSON.parse(localStorage.getItem('Result')) || '0';
+</script>
+</body>
+</html>
